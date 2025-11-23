@@ -29,9 +29,8 @@ $tasks = [
     ["28. Problem wydawania reszty", "AZ", "SO"]
 ];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['losuj']))
-        $_SESSION['losuj'] = true;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['losuj'])) {
+    $_SESSION['losuj'] = true;
 
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
@@ -140,18 +139,17 @@ if (!isset($_SESSION['losuj'])) {
 
     <div>
         <?php
-        $numberExcel = count($tasksExcel);
-        $numberJava = count($tasksJava);
-        echo "<p id='head'>Excel: $numberExcel &nbsp;Java: $numberJava</p>";
+        // $numberExcel = count($tasksExcel);
+        // $numberJava = count($tasksJava);
+        echo "<p id='head'>Excel: 19 &nbsp;Java: 18</p>";
         ?>
 
         <form method="post">
-            <?php foreach ($records as $r): ?>
+            <?php if (!empty($records)) foreach ($records as $r): ?>
                 <p class="record"><?= $r ?></p>
             <?php endforeach; ?>
 
             <button type="submit" name="losuj" <?= (empty($tasksExcel) || empty($tasksJava)) ? 'disabled' : '' ?>>Losuj zestaw</button>
-            <button type="submit" name="reset">Reset</button>
         </form>
     </div>
 
