@@ -1,0 +1,45 @@
+\chapter{Wprowadzenie}
+\label{cha:wprowadzenie}
+
+Współczesne nauczanie przedmiotów technicznych wymaga od prowadzących zajęcia efektywnego zarządzania procesem oceniania oraz sprawdzania wiedzy studentów. W szczególności w przypadku przedmiotów praktycznych, takich jak programowanie czy analiza danych, istotne jest zapewnienie studentom różnorodnych zestawów zadań egzaminacyjnych, 
+co pozwala uniknąć powtarzalności i zwiększa obiektywność ocen.
+
+Celem niniejszej pracy jest opracowanie narzędzia informatycznego, 
+które automatyzuje proces losowania zestawów zadań dla studentów. 
+Narzędzie zostało zaimplementowane w języku PHP i udostępnia prosty interfejs webowy, 
+umożliwiający przydzielanie zadań z dwóch głównych kategorii: 
+programowania w języku Java oraz tworzenia arkuszy i analiz w Excelu. 
+System ten pozwala na łatwe generowanie unikalnych zestawów dla kolejnych studentów oraz przechowywanie historii przydzielonych zadań w sesji użytkownika.
+
+%---------------------------------------------------------------------------
+
+\section{Opis Problemu}
+\label{sec:opisProblemu}
+
+Podczas przygotowywania kolokwiów i sprawdzianów praktycznych nauczyciele napotykają problem losowego przydzielania tematów studentom w taki sposób, aby każdy student otrzymał unikalny zestaw zadań z różnych kategorii tematycznych. W warunkach tradycyjnych, ręczne losowanie lub przydzielanie zestawów może być czasochłonne i podatne na błędy. Ponadto istnieje ryzyko powtarzalności przydzielanych zadań oraz trudności w utrzymaniu spójnej dokumentacji wyników.
+
+Problem ten wymaga zatem opracowania systemu, który:
+\begin{enumerate}
+    \item Automatycznie przydziela zadania z określonych kategorii (np. Java i Excel).
+    \item Gwarantuje unikalność zestawów dla każdego studenta.
+    \item Rejestruje historię przydzielonych zadań w celu późniejszej analizy i kontroli.
+    \item Udostępnia proste, przyjazne dla użytkownika środowisko webowe.
+\end{enumerate}
+
+Rozwiązanie tego problemu zwiększa efektywność pracy nauczyciela, minimalizuje ryzyko powtarzalności zadań oraz ułatwia organizację egzaminów i kolokwiów.
+
+%---------------------------------------------------------------------------
+
+\section{Analiza i opis istniejących rozwiązań}
+\label{sec:analizaIOpisIstniejacychRozwiazan}
+
+W literaturze i praktyce edukacyjnej można wyróżnić kilka podejść do przydzielania zadań studentom:
+\begin{enumerate}
+    \item Ręczne losowanie i przydzielanie zestawów – najprostsze podejście polegające na fizycznym losowaniu kart z zadaniami lub przygotowaniu arkuszy z przypisanymi zadaniami. Metoda ta jest czasochłonna i nie gwarantuje pełnej losowości ani łatwego zapisu historii wyników.
+    \item Arkusze kalkulacyjne (Excel, Google Sheets) – istnieją rozwiązania wykorzystujące funkcje arkuszy kalkulacyjnych do losowania zadań przy użyciu wbudowanych funkcji losowych i filtrowania danych. Chociaż metoda ta może być w pełni automatyczna, wymaga znajomości formuł i jest ograniczona przy pracy wieloosobowej lub przy dużej liczbie zadań.
+    \item Specjalistyczne oprogramowanie do egzaminów i testów – komercyjne systemy pozwalają na tworzenie testów z automatycznym przydzielaniem zadań, monitorowaniem postępów studentów i generowaniem statystyk. Ich główną wadą jest koszt oraz konieczność instalacji i obsługi dedykowanego oprogramowania.
+\end{enumerate}
+
+W tym kontekście opracowane narzędzie w PHP stanowi rozwiązanie lekkie, elastyczne i łatwo dostępne w środowisku webowym. Dzięki wykorzystaniu sesji, losowania elementów z tablicy oraz prostego interfejsu użytkownika, system pozwala szybko przydzielać unikalne zestawy zadań, jednocześnie rejestrując historię wyników bez konieczności stosowania zewnętrznych aplikacji czy skomplikowanych arkuszy kalkulacyjnych.
+
+%---------------------------------------------------------------------------

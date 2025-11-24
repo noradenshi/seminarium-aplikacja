@@ -1,0 +1,77 @@
+\chapter{Opis technologii i algorytmów}
+\label{cha:opisTechnologiiIAlgorytmow}
+
+Niniejszy rozdział przedstawia technologie oraz algorytmy wykorzystane w opracowanym systemie do losowania zestawów zadań na kolokwium. Omówione zostaną zarówno narzędzia programistyczne, jak i logika działania aplikacji.
+
+%---------------------------------------------------------------------------
+
+\section{Technologie użyte w systemie}
+\label{sec:technologieUzyteWSystemie}
+
+System został zaimplementowany jako aplikacja webowa w języku PHP, co umożliwia łatwe uruchamianie w przeglądarce internetowej bez konieczności instalacji dodatkowego oprogramowania. Wybrane technologie i narzędzia to:
+
+\begin{enumerate}
+      \item PHP – język skryptowy po stronie serwera, wykorzystywany do logiki biznesowej, zarządzania sesjami i generowania dynamicznego HTML.
+      \item HTML i CSS – służą do tworzenia interfejsu użytkownika oraz stylizacji strony, w tym przycisków, formularzy i obszarów wyświetlania historii losowań.
+      \item Mechanizm sesji w PHP \texttt{ session\_start() } – pozwala na przechowywanie danych między kolejnymi wywołaniami strony, co umożliwia zachowanie stanu aplikacji, np. listy pozostałych zadań i historii losowań.
+      \item Przeglądarka internetowa – umożliwia interakcję użytkownika z aplikacją oraz wyświetlanie wyników losowań w formie czytelnej dla nauczyciela lub administratora.
+\end{enumerate}
+
+Zastosowanie tych technologii pozwala na prostą, a jednocześnie funkcjonalną implementację systemu, który jest dostępny w dowolnym środowisku z obsługą PHP i przeglądarki internetowej.
+
+%---------------------------------------------------------------------------
+
+\section{Struktura danych}
+\label{sec:strukturaDanych}
+
+Podstawowym elementem systemu jest tablica wielowymiarowa \lstinline|$tasks|, która przechowuje wszystkie dostępne zadania wraz z ich typami. Każdy element tablicy zawiera:
+
+\begin{itemize}
+      \item nazwę zadania (ciąg tekstowy),
+      \item typy zadań (np. EX – Excel, SO – Excel, BS, DZ – Java).
+\end{itemize}
+
+Podczas inicjalizacji aplikacji tablica \lstinline|$tasks| jest przetwarzana na dwie listy: \lstinline|$tasksExcel| i \lstinline|$tasksJava|, które przechowują zadania dostępne do losowania dla każdej kategorii.
+Ponadto w sesji PHP przechowywane są:
+
+\begin{itemize}
+      \item numer kolejnego studenta \lstinline|$_SESSION['student']|,
+      \item historia losowań \lstinline|$_SESSION['records']|,
+      \item aktualne listy zadań do wylosowania \lstinline|$_SESSION['tasksExcel']| i \lstinline|$_SESSION['tasksJava']|.
+\end{itemize}
+
+Taka struktura danych pozwala na szybkie losowanie zadań, uniknięcie powtarzalności oraz łatwe wyświetlanie wyników w interfejsie użytkownika.
+
+%---------------------------------------------------------------------------
+
+\section{Algorytm Losowania Zestawow}
+\label{sec:algorytmLosowaniaZestawow}
+
+Proces losowania opiera się na kilku krokach:
+
+\begin{enumerate}
+      \item Sprawdzenie, czy sesja została zainicjalizowana – jeśli nie, system tworzy listy zadań Excel i Java oraz inicjalizuje licznik studentów i historię losowań.
+      \item Losowanie zadania – z list \lstinline|$tasksExcel| i \lstinline|$tasksJava| losowane są po jednym zadaniu dla kolejnego studenta przy użyciu funkcji \lstinline|rand()|.
+      \item Usunięcie wylosowanego zadania – \lstinline|array_splice()| usuwa wybrane zadania z list, aby uniknąć powtórzeń w przyszłych losowaniach.
+      \item Rejestracja wyniku losowania – wylosowany zestaw zapisywany jest w tablicy \lstinline|$_SESSION['records']| i numer student jest inkrementowany.
+      \item Wyświetlenie wyników – w interfejsie użytkownika prezentowana jest lista wszystkich wylosowanych zestawów.
+      \item Algorytm jest prosty, ale skuteczny – zapewnia losowy, unikalny przydział zadań przy minimalnym nakładzie obliczeniowym.
+\end{enumerate}
+
+
+%---------------------------------------------------------------------------
+
+\section{Bezpieczeństwo i ograniczenia algorytmu}
+\label{sec:bezpieczenstwoIOgraniczniaAlgorytmu}
+
+Chociaż algorytm losowania działa poprawnie w środowisku lokalnym lub dla jednego użytkownika, istnieją pewne ograniczenia:
+\begin{itemize}
+      \item Brak obsługi wielu użytkowników jednocześnie – w przypadku równoległego dostępu do systemu, sesje mogą się nadpisywać.
+      \item Brak walidacji danych wejściowych – formularz nie zabezpiecza przed niepoprawnym wywołaniem metody POST.
+      \item Ograniczona skalowalność – lista zadań przechowywana w pamięci sesji może być niewystarczająca dla dużej liczby studentów lub bardzo rozbudowanego zestawu zadań.
+      \item Pomimo tych ograniczeń, system jest wystarczający do zastosowań edukacyjnych w małej skali i stanowi dobrą podstawę do dalszej rozbudowy.
+\end{itemize}
+
+%---------------------------------------------------------------------------
+
+

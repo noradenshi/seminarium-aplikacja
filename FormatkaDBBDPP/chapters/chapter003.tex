@@ -1,0 +1,73 @@
+\chapter{Prezentacja wyników}
+\label{cha:prezentacjaWynikow}
+
+Celem niniejszego rozdziału jest przedstawienie działania opracowanego systemu, 
+jego interfejsu użytkownika oraz efektów losowania zestawów zadań dla studentów. 
+W rozdziale pokazano, w jaki sposób aplikacja prezentuje wyniki, w jaki sposób użytkownik wchodzi w interakcję z systemem oraz przykładowe print screeny ilustrujące funkcjonalność aplikacji.
+
+% ------------------------------------------------------------------------
+
+\section{Opis aplikacji}
+\label{sec:opisAplikacji}
+
+Aplikacja została zaprojektowana jako prosty system webowy, umożliwiający losowanie zestawów zadań w dwóch kategoriach: Java i Excel. Interfejs użytkownika składa się z następujących elementów:
+\begin{itemize}
+    \item Nagłówek strony – zawiera nazwę systemu „IRZ” i pełni funkcję informacyjną.
+    \item Obszar historii losowań – wyświetla wylosowane zestawy dla kolejnych studentów w postaci listy tekstowej. Każdy wpis zawiera numer studenta oraz przydzielone zadania w obu kategoriach.
+    \item Przycisk losowania zestawu – po kliknięciu generuje nowy zestaw zadań dla kolejnego studenta. Przycisk jest dezaktywowany, jeśli nie ma już dostępnych zadań w którejkolwiek kategorii.
+    \item Aplikacja wykorzystuje sesje PHP do przechowywania stanu między kolejnymi wywołaniami strony, dzięki czemu wszystkie wylosowane zestawy pozostają widoczne w historii, nawet po odświeżeniu strony.
+\end{itemize}
+
+% ------------------------------------------------------------------------
+
+\section{Prezentacja wyników losowania}
+\label{sec:prezentacjaWynikowLosowania}
+
+Po naciśnięciu przycisku „Losuj zestaw”, aplikacja wykonuje następujące kroki:
+\begin{enumerate}
+    \item Losuje po jednym zadaniu z list tasksExcel i tasksJava.
+    \item Tworzy rekord w formacie:
+    \begin{lstlisting}[language=PHP]
+        Osoba: [numer studenta]
+        [zadanie Java]
+        [zadanie Excel]
+    \end{lstlisting}
+    \item Dodaje rekord do historii \lstinline|$_SESSION['records']| i wyświetla go w obszarze wyników.
+    \item Aktualizuje stan list zadań, usuwając już wylosowane elementy, aby zapewnić unikalność zestawów.
+\end{enumerate}
+
+Dzięki temu każdy student otrzymuje unikalny zestaw zadań, a nauczyciel może w prosty sposób śledzić przebieg losowań oraz sprawdzić, jakie zadania zostały już przydzielone.
+
+% ------------------------------------------------------------------------
+
+\section{Intefrejs użytkownika}
+\label{sec:interfejsUzytkownika}
+
+Interfejs użytkownika został zaprojektowany z myślą o czytelności i prostocie obsługi. Główne cechy:
+\begin{itemize}
+    \item Minimalistyczny design – wszystkie elementy rozmieszczone w centralnym oknie o stałej szerokości i wysokości.
+    \item Wyraźne oznaczenie kategorii zadań – w nagłówku okna podawana jest liczba pozostałych zadań w każdej kategorii.
+    \item Historia losowań w formie listy – każde losowanie jest wyświetlane w osobnym polu <p> z wyróżnionym numerem studenta.
+    \item Przycisk aktywowany tylko przy dostępnych zadaniach – uniemożliwia losowanie, jeśli któraś z kategorii jest już pusta.
+\end{itemize}
+
+% ------------------------------------------------------------------------
+
+\section{Print screeny aplikacji}
+\label{sec:printScreenyAplikacji}
+
+W celu lepszego zobrazowania działania systemu, poniżej przedstawiono przykładowe zrzuty ekranu:
+\begin{enumerate}
+    \item Ekran początkowy aplikacji – pokazuje nagłówek, liczby pozostałych zadań w każdej kategorii oraz przycisk losowania.
+            [Tutaj dodać zdj]
+    \item Historia losowań po kilku losowaniach – wyświetlone zostały wylosowane zestawy dla kilku studentów.
+            [Tutaj dodać zdj]
+    \item Przycisk losowania dezaktywowany – widok po wyczerpaniu list zadań, pokazujący, że system uniemożliwia dalsze losowania.
+            [Tutaj dodać zdj]
+\end{enumerate}
+
+Print screeny umożliwiają wizualne przedstawienie działania aplikacji, potwierdzając poprawność implementacji algorytmu losowania i funkcjonalności interfejsu użytkownika.
+
+% ------------------------------------------------------------------------
+
+
