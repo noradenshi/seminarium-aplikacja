@@ -70,4 +70,41 @@ Print screeny umożliwiają wizualne przedstawienie działania aplikacji, potwie
 
 % ------------------------------------------------------------------------
 
+\section{Wnioski}
+\label{sec:wnioski}
 
+Na podstawie przeprowadzonych testów oraz analizy działania aplikacji można stwierdzić, że system spełnia swoje podstawowe założenia funkcjonalne. 
+Aplikacja poprawnie losuje zestawy zadań z dwóch kategorii, zapewniając ich unikalność oraz umożliwiając użytkownikowi śledzenie pełnej historii przydzielonych zestawów. 
+Interfejs użytkownika jest czytelny i intuicyjny, co pozwala na wygodne korzystanie z systemu bez konieczności posiadania wiedzy technicznej.
+
+Ważnym elementem implementacji jest wykorzystanie mechanizmu sesji, który umożliwia przechowywanie bieżącego stanu aplikacji, 
+w tym numeru studenta oraz list pozostałych zadań. Rozwiązanie to okazuje się wystarczające w środowisku jednostanowiskowym i przy niewielkiej liczbie użytkowników.
+
+Pomimo swojej prostoty system pokazuje, że nawet niewielkie narzędzie webowe może skutecznie wspierać proces dydaktyczny, automatyzując czynności, 
+które tradycyjnie wykonywano ręcznie. Eliminacja powtarzalnych zadań oraz ułatwiona kontrola nad przebiegiem losowania to główne zalety opracowanego rozwiązania.
+
+% ------------------------------------------------------------------------
+
+\section{Możliwości rozbudowy systemu}
+\label{sec:mozliwosciRozbudowySystemu}
+
+Aplikacja, pomimo poprawnego działania w obecnej formie, może zostać rozszerzona o dodatkowe funkcjonalności, które zwiększyłyby jej użyteczność oraz skalowalność. Do najważniejszych możliwości rozbudowy należą:
+
+\begin{enumerate}
+    \item Zapis wyników do bazy danych
+            Zamiast przechowywania wyników w sesji, możliwe byłoby zapisanie historii losowań w relacyjnej bazie danych (np. MySQL). Pozwoliłoby to na trwałe archiwizowanie danych, analizę wyników, filtrowanie i generowanie raportów.
+    \item Obsługa wielu użytkowników
+            Aktualna wersja zakłada pracę jednego użytkownika na jednej instancji sesji. Rozbudowa o system logowania lub identyfikacji nauczycieli umożliwiłaby korzystanie z aplikacji w środowisku wielodostępnym.
+    \item Możliwość resetowania losowania
+        Przydatną funkcją byłoby dodanie opcji przywrócenia list zadań do stanu początkowego. Pozwoliłoby to używać narzędzia wielokrotnie w ramach różnych grup studentów.
+    \item Dynamiczne zarządzanie listą zadań 
+        System można rozbudować o formularz umożliwiający dodawanie nowych zadań, usuwanie istniejących lub zmianę kategorii zadań bez konieczności edycji kodu źródłowego.
+    \item Eksport wyników
+        Możliwość eksportu historii losowań do pliku CSV lub PDF ułatwiłaby dokumentowanie pracy nauczyciela oraz przechowywanie wyników w innych systemach.
+    \item Integracja z platformami e-learningowymi
+        Aplikacja mogłaby zostać rozszerzona o integrację z systemami takimi jak Moodle, co pozwoliłoby na automatyczne przydzielanie zadań studentom w środowisku zdalnym.
+    \item Rozbudowa interfejsu użytkownika
+        Można zastosować framework CSS (np. Bootstrap) lub bibliotekę JavaScript, aby zwiększyć ergonomię, dodać animacje, licznik pozostałych zadań czy bardziej rozbudowane komunikaty dla użytkownika.
+\end{enumerate}
+
+Wprowadzenie powyższych usprawnień mogłoby znacząco zwiększyć możliwości aplikacji i dostosować ją do bardziej zaawansowanych lub komercyjnych potrzeb.
