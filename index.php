@@ -105,7 +105,8 @@ if (!isset($_SESSION['losuj'])) {
             font-size: 10pt
         }
 
-        p {
+        p#head {
+            height: 30px;
             padding: 0.8ex 0;
             text-align: center;
             background-color: #f3f3ee;
@@ -115,9 +116,13 @@ if (!isset($_SESSION['losuj'])) {
             font-weight: bold
         }
 
-        textarea {
-            height: 145px;
-            resize: none;
+        p.record {
+            margin-bottom: 20px;
+        }
+
+        .recordwrap {
+            height: auto;
+            resize: vertical;
             background-color: white;
             color: black;
             border-style: solid;
@@ -145,11 +150,14 @@ if (!isset($_SESSION['losuj'])) {
         ?>
 
         <form method="post">
-            <?php if (!empty($records)) foreach ($records as $r): ?>
-                <p class="record"><?= $r ?></p>
-            <?php endforeach; ?>
+            <div class="recordwrap">
+                <?php if (!empty($records)) foreach ($records as $r): ?>
+                    <p class="record"><?= $r ?></p>
+                <?php endforeach; ?>
+            </div>
 
-            <button type="submit" name="losuj" <?= (empty($tasksExcel) || empty($tasksJava)) ? 'disabled' : '' ?>>Losuj zestaw</button>
+            <button type="submit" name="losuj">Losuj zestaw</button>
+            <!-- <button type="submit" name="losuj" <?= (empty($tasksExcel) || empty($tasksJava)) ? 'disabled' : '' ?>>Losuj zestaw</button> -->
         </form>
     </div>
 
