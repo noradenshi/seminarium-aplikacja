@@ -43,7 +43,6 @@ function initializeSession($tasks) {
     $_SESSION['tasksExcel'] = $tasksExcel;
     $_SESSION['tasksJava'] = $tasksJava;
     
-    // ZAPAMIĘTUJEMY STAN POCZĄTKOWY (MAKSYMALNĄ LICZBĘ)
     $_SESSION['maxExcel'] = count($tasksExcel);
     $_SESSION['maxJava'] = count($tasksJava);
     
@@ -55,12 +54,10 @@ function initializeSession($tasks) {
 $input = json_decode(file_get_contents('php://input'), true);
 $action = isset($input['action']) ? $input['action'] : '';
 
-// --- OBSŁUGA RESETU ---
 if ($action === 'reset') {
     session_unset();
     initializeSession($tasks);
 } 
-// --- OBSŁUGA LOSOWANIA ---
 elseif ($action === 'draw') {
     if (!isset($_SESSION['initialized'])) {
         initializeSession($tasks);
@@ -93,12 +90,10 @@ elseif ($action === 'draw') {
     }
 }
 
-// Zmieniono odpowiedź JSON: zwracamy maxExcel zamiast count
 echo json_encode([
     'records' => $_SESSION['records'],
-    'maxExcel' => $_SESSION['maxExcel'], // Stała wartość
-    'maxJava' => $_SESSION['maxJava'],   // Stała wartość
-    'canDraw' => (!empty($_SESSION['tasksExcel']) && !empty($_SESSION['tasksJava']))
+    'maxExcel' => $_SESSION['maxExcel'],
+    'maxJava' => $_SESSION['maxJava'],
 ]);
 exit;
 ?>

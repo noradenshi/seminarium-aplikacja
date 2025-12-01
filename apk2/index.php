@@ -47,7 +47,6 @@
             function updateView(data) {
                 if (!data) return;
 
-                // ZMIANA: Teraz wyświetlamy zawsze maksymalną (początkową) liczbę zadań
                 headLabel.innerHTML = `Excel: ${data.maxExcel} &nbsp;Java: ${data.maxJava}`;
 
                 if (data.records && data.records.length > 0) {
@@ -57,13 +56,7 @@
                     recordsArea.value = '';
                 }
 
-                if (!data.canDraw) {
-                    drawBtn.disabled = true;
-                    drawBtn.textContent = "Brak zadań do wylosowania";
-                } else {
-                    drawBtn.disabled = false;
-                    drawBtn.textContent = "Losuj zestaw";
-                }
+                
             }
 
             async function communicateWithServer(action = null) {
